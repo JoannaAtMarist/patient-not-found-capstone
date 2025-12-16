@@ -1,0 +1,213 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#redactContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;   /*allows scaling on big screens */
+    margin: auto;
+    justify-content: flex-start;
+    padding: 40px 0;
+    gap: 30px;
+}
+
+.redact-box {
+    background-color: #e9e9e9;
+    padding: 50px;
+    border-radius: 8px;
+    width: 100%;         /* fill container width */
+    max-width: none;     /* remove 600px limit */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.redact-box h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+
+}
+
+.small-text {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 25px;
+
+}
+
+/* ---- Text input Area ----- */
+textarea {
+    width: 100%;
+    height: 150px;
+    resize: vertical;      /* allow the user to drag-resize */
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    
+    min-height: 150px;
+    max-height: 600px;     /* prevent giant textboxes */
+}
+
+/* --- File Upload */
+.file-label {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#fileUpload {
+    display: none;
+}
+
+#redactButton {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#redactButton:hover {
+    background-color: #333;
+}
+
+#loadingSpinner {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Output Box */
+
+#textAreaDiv {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 30px;
+
+    width: 96%;      
+    max-width: none; 
+
+    padding: 25px;
+    /* width: 90%; */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+#textAreaDiv h2 {
+    font-size: 22px;
+    margin-top: 0;
+}
+
+#redactedText {
+    font-size: 16px;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+/*Responsive*/
+@media(max-width: 600px) {
+
+    .redact-box,
+    #textAreaDiv {
+        padding: 30px;
+    }
+
+    textarea {
+        height: 120px;
+    }
+}
+
+
+/* ---- Button ---- */
+#download-button-doc {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1c5e0e;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-doc:hover {
+    background-color: #333;
+}
+
+/* ---- Button ---- */
+#download-button-pdf {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1f2dc2;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-pdf:hover {
+    background-color: #333;
+}
+
+
+@media (min-width: 900px) {
+    textarea {
+        min-height: 280px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #redactContainer {
+        max-width: 1400px;
+    }
+
+    .redact-box {
+        padding: 60px;
+    }
+}

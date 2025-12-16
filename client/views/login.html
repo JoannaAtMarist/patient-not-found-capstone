@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Head-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+
+    <link rel="icon" href="/images/favicon.png" alt="Favicon">
+    <title>Patient Not Found</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+</head>
+
+<!--Body-->
+
+<body>
+
+    <!--Navigation Menu-->
+    <header>
+        <nav id="navmenu">
+            <img src="/images/PNF2.png" alt="Patient Not Found Logo" width="50" height="50">
+            <b>Patient Not Found</b>
+        </nav>
+
+    </header>
+    <br><br>
+
+    <main id="loginContainer">
+        <div id="loginBox">
+            <h1>Login</h1>
+            <form onsubmit="event.preventDefault();">
+                <label for="username">USERNAME</label>
+                <input type="text" id="username" placeholder="Enter Username">
+
+                <label for="password">PASSWORD</label>
+                <input type="password" id="password" placeholder="Enter Password">
+
+                <button id="login-button">Log In</button>
+                <center>
+                    <p class="small-text">Don't Have An Account? <a href="createaccount">Create Account</a></p>
+                    <button onclick="location.href='/login/cas'"> login with CAS</button>
+=======
+                    <p class="small-text">Don't Have An Account? <a href="create-account">Create Account</a></p>
+                </center>
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <script type="module" src="/js/global.js"></script>
+    <script type="module" src="/js/login.js"></script>
+
+
+    <!-- <script>
+        // Session check to prevent logged-in users from seeing the login page
+        fetch("/api/session/status")
+            .then(res => res.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    // Redirect based on role if you store it
+                    if (data.user?.role === "admin") {
+                        location.replace("/members");
+                    } else {
+                        location.replace("/home");
+                    }
+                }
+            })
+            .catch(err => console.warn("Session check failed:", err));
+    </script> -->
+
+</body>
+
+
+<!--Footer-->
+<footer>
+    <center>
+        <br><br>
+        <b>(C) 2025 Patient Not Found</b><br>
+        Collaborators: Patrick Daileg, Joanna Picciano, Alondra Trejo-Palma, Samuel Wu<br>
+        Please note that the AI may make mistakes (like us humans.)<br>
+
+    </center>
+</footer>
+
+
+</html>

@@ -1,0 +1,5 @@
+1. Login to your corresponding account with login credentials.
+2. Click on the summary generator button to generate summaries.
+3. Generate your summary through entering your desired file or pasted text.
+4. Allow the ability to edit your AI-Generated summary through the edit summaries button.
+5. You are able to save the summary as a document or PDF file.

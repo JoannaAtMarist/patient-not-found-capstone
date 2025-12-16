@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Head-->
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="icon" href="/images/favicon.png" alt="Favicon">
+    <title>Patient Not Found</title>
+    <link rel="stylesheet" href="/css/style-almost.css">
+    <!-- <link rel="stylesheet" href="/css/redactPHI.css"> -->
+    <link rel="stylesheet" href="/css/navigation.css">
+    <link rel="stylesheet" href="/css/hider.css">
+
+    <!-- jsPDF for PDF export (global, non-module) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation (rendered by navigation.js when authenticated) -->
+    <header>
+        <nav id="navmenu"></nav>
+    </header>
+
+
+
+    <div id="layout">
+
+        <!-- LEFT SIDEBAR -->
+        <aside id="sidebar">
+            <h3>Summaries</h3>
+            <p>(This tab doesn't work yet either....</p>
+            <ul id="summaryList"></ul>
+            <div class="tool-card">Note 1</div>
+            <div class="tool-card">Note 2</div>
+            <div class="tool-card">Note 3</div>
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main id="mainContent">
+
+            <!-- Scrollable center content -->
+            <div id="centerScroll">
+
+                <!-- your redactContainer goes here -->
+                <div class="redact-box">
+                    <h1>The Summarizer</h1>
+
+
+                    <!-- File Upload -->
+                    <label for="fileUpload" class="file-label"></label>
+                    <input type="file" id="fileUpload" name="notes" multiple accept=".pdf, .docx, .json, .txt"
+                        style="display:none;">
+
+                    <!-- Redact + Summarize Button -->
+                    <button id="redactButton" style="display:none;">Redact &amp; Summarize</button>
+
+                    <!-- Spinner -->
+                    <div id="loadingSpinner" class="hidden">
+                        <div class="spinner"></div>
+                        <p>Processing note(s)...</p>
+                    </div>
+
+
+
+                </div>
+
+                <div id="redactContainer">
+                    <!-- existing summary UI... -->
+                </div>
+
+                <!-- the grid of summary cards -->
+                <div id="summaryGrid"></div>
+
+            </div>
+
+
+            <!-- NotebookLM-style bottom input bar (pinned) -->
+            <div id="bottomInputBar">
+
+                <h3>Here is where you would type/paste a doctor note...
+                    Or upload files...</h3>
+                <textarea id="textInputBar" placeholder="Start typing your doctor note..."></textarea>
+
+                <div id="bottomActions">
+                    <button id="uploadFromBar">Upload Files</button>
+                    <button id="summarizeFromBar">Summarize</button>
+                </div>
+
+                <!-- hidden real file input -->
+                <input type="file" id="fileUploadBar" multiple accept=".pdf, .docx, .txt, .json" style="display:none;">
+            </div>
+
+        </main>
+
+        <!-- RIGHT PANEL -->
+        <!-- <aside id="rightPanel">
+            <h2>Highlights</h2>
+            <div class="tool-card">Feature</div>
+            <div class="tool-card">Not</div>
+            <div class="tool-card">Available</div>
+            <div class="tool-card">Yet</div>
+            <div class="tool-card">...</div>
+            <div class="tool-card">Sorry</div>
+        </aside> -->
+        <aside id="rightPanel">
+            <h2>Source Highlights</h2>
+            <div id="sourceHighlightBox" class="highlight-box">
+                <p class="placeholder-text">Run a summary to display highlights.</p>
+            </div>
+
+            <h2>Confidence Flags</h2>
+            <div id="confidenceBox" class="highlight-box">
+                <p class="placeholder-text">Run a summary to display confidence markers.</p>
+            </div>
+        </aside>
+
+
+    </div>
+
+    <script type="module" src="/js/global.js"></script>
+    <script type="module" src="/js/navigation.js"></script>
+    <script type="module" src="/js/file-handler.js"></script>
+    <script type="module" src="/js/summarizer-columned.js"></script>
+
+</body>
+
+<!--Footer-->
+<footer>
+    <br><br>
+    <center>
+        <br><br>
+        <b>(C) 2025 Patient Not Found</b>
+    </center>
+</footer>
+
+</html>

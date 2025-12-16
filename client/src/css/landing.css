@@ -1,0 +1,80 @@
+
+/* ---- Container ---- */
+#landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+}
+/* ---- Login Box ---- */
+#landingBox {
+    background-color: rgb(227, 226, 226);
+    padding: 50px;
+    border-radius: 8px;
+
+    /* mockup-matched sizing */
+    width: 500px;
+    height: 370px;
+    max-width: 500px;
+    min-height: 370px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    /* prevent flex auto-resizing */
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.landing-btn {
+    background-color: black;
+    padding: 16px 24px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 280px;
+    text-align: center;
+}
+.create-account-btn {
+    background-color: #4AA585;
+    padding: 16px 24px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 280px;
+    text-align: center;
+}
+
+.landing-btn:hover {
+    background-color: #3f8f73;
+}
+
+.create-account-btn:hover {
+    background-color: blue;
+}
+
+/* small text link */
+.landing-note {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.landing-note a {
+    color: #0275d8;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.landing-note a:hover {
+    text-decoration: underline;
+}

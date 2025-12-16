@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Head-->
+
+<head>
+    <meta charset="UTF-8" name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="/images/favicon.png" alt="Favicon">
+    <title>Patient Not Found</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/help.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+</head>
+
+<!--Body-->
+
+<body>
+
+    <!--Navigation Menu-->
+    <header>
+        <nav id="navmenu">
+            <!--Navigation JavaScript file-->
+            <script type="module" src="/js/navigation.js"></script>
+        </nav>
+
+    </header>
+
+    <br>
+
+    <center>
+        <!--Title-->
+        <div class="help-box">
+            <h1>Help Page</h1>
+            <h2>What do you need help with?</h2>
+        </div>
+    </center>
+    <!--Prologue-->
+    <p><b>Welcome!</b><br>
+        Thank you for considering Patient Not Found, a Patient Information Summarizer and Redactor program.</p>
+
+    <!--Chapter 1-->
+    <p><b>1. Getting Started</b><br>
+        Before you can create summaries, you must create an account. First, head to the login page. Since you may not
+        have created an account yet, press the “Create Account” link underlined below the login button.<br><br>
+        Fill out the required fields in the Account Creation page. Fields include Username (must be unique), First Name,
+        Last Name, Email, and Password. Before clicking “Create Account”, please select a role.<br><br>
+        Once you have created an account, you will be redirected to the Login page. Enter your username and password,
+        and press the “Log In” button. </p>
+
+    <!--Chapter 2-->
+    <p><b>2. Navigation Bar</b><br>
+        Have you just created an account? Splendid. Now it's time to get familiarized with the User Interface. Don't
+        worry, it is simple enough for anyone to remember.<br><br>
+        On the top left is the Home Button. When you leave the Home Menu, this is your way back to it.
+        To access the Account Settings Menu, click on the Gear icon.
+        If you want to log out of the application, click “Logout”, underlined in black.
+    </p>
+
+    <!--Chapter 3-->
+    <p><b>3. Home Menu</b><br>
+        Depending on your role, you may see two or three big buttons on the Home Menu. For standard Users, you have two
+        buttons: “Create New Summary”, and “Go to Account Settings".
+        Account Settings works the same way as the Account Settings button on the Navigation Bar.
+        The Create New Summary button redirects you to the summary creation page.
+
+    </p>
+
+    <!--Chapter 4-->
+    <p><b>4. Administrator Role</b><br>
+        As an Administrator, you will see an extra button on the Home Menu. The Admin Dashboard allows you to see who
+        logged into the program. </p>
+
+    <!--Chapter 5-->
+    <p><b>5. Account Settings</b><br>
+        Made a mistake while creating your account? The Account Settings page makes editing your user profile a breeze.
+        Simply click on the credential you need to change, and enter a new value in the field. If you want to save your
+        changes, click “Save and Exit” to save your new credentials. Please note that changing your username and/or
+        password will require you to use those credentials next time you log in.<br><br>
+        If you do not want to save any changes you've made to your account, click “Quit Without Saving.”</p>
+
+    <!--Chapter 6-->
+    <p><b>6. Summary Creation</b><br>
+        Now that you've mastered navigating the User Interface, you are now ready to create summaries. To create a
+        summary, simply paste text into the “Paste Text Here” input field. Alternatively, you can upload PDF or DOC
+        files and summarize them that way.<br><br>
+        When you're done pasting or uploading files to the page, simply click the “Redact PHI” button. Your summary
+        should begin generating in a few seconds.
+        Once the summary is finished generating, you can read the summary and download it to your computer as a PDF or
+        DOC file. If you are not satisfied with the result, click “Edit Summary” to edit the generated summary.</p>
+
+    <!--Chapter 7-->
+    <p><b>7. What do “Source Highlights” and “Confidence Flags” mean?</b><br>
+        <u>Source Highlights</u> show where the summary came from. The system marks matching text in the
+        original note with a light yellow highlight. This helps you verify that key findings in the
+        summary are supported by the source note.
+        <br><br>
+        <u>Confidence Flags</u> call out sentences in the summary that may need a second look. You will see:
+        <span aria-label="flag legend">✓ = typical confidence</span> and
+        <span aria-label="flag legend">⚠︎ = needs review</span>.
+        A sentence is flagged when it’s hard to match to the source wording or includes cautious language (e.g., “may,”
+        “likely,” “appears”).
+        <br><br>
+        <b>How to use them</b><br>
+        • Turn these features on/off with the checkboxes under the summary box (“Source text highlighting” and
+        “Confidence flags”).<br>
+        • Click into the summary to edit it; the flags/highlights will refresh automatically when you switch tabs or
+        toggle the checkboxes.<br>
+        • Use highlights to quickly trace the summary back to the note; use flags to decide where to confirm details in
+        the chart or revise wording.
+        <br><br>
+        <b>What they are not</b><br>
+        • They are assistive cues, not a diagnosis or clinical decision support.<br>
+        • Highlights are approximate text matches; if the note’s wording is very different, a sentence may not highlight
+        even if it’s clinically correct.
+    </p>
+
+
+    <script type="module" src="/js/global.js"></script>
+    <script type="module" src="/js/navigation.js"></script>
+    <script type="module" src="/js/login.js"></script>
+
+
+</body>
+
+
+<!--Footer-->
+<footer>
+    <center>
+        <br><br>
+        <b>(C) 2025 Patient Not Found</b><br>
+        Collaborators: Patrick Daileg, Joanna Picciano, Alondra Trejo-Palma, Samuel Wu<br>
+        Please note that the AI may make mistakes (like us humans.)<br>
+
+    </center>
+</footer>
+
+
+</html>

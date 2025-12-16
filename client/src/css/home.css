@@ -1,0 +1,153 @@
+/* =========================================
+   Patient Not Found – Homepage
+   Matches mockup + locks layout between local/server
+   ========================================= */
+
+
+/* ---- Login Box ---- */
+#hipaaDiv {
+    background-color: rgb(227, 226, 226);
+    padding: 50px;
+    border-radius: 8px;
+
+    /* mockup-matched sizing */
+    width: 500px;
+    height: 460px;
+    max-width: 500px;
+    min-height: 370px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    /* prevent flex auto-resizing */
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#accountButton {
+    width: 200px;
+    height: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(100px);
+    border: none;
+    outline: none;
+
+}
+
+#summaryButton {
+    width: 200px;
+    height: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(100px);
+    border: none;
+    outline: none;
+
+}
+
+#summaryButtonC {
+    width: 200px;
+    height: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(100px);
+    border: none;
+    outline: none;
+
+}
+
+#provideFeedbackButton {
+    width: 200px;
+    height: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.434);
+    backdrop-filter: blur(10px);
+    border: none;
+    outline: none;
+}
+
+#adminDashboardButton {
+    width: 200px;
+    height: 200px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ---- Button ---- */
+#closeButton {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#hipaaOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Bigger card */
+#hipaaCard {
+    width: 85%;
+    max-width: 1100px;
+    height: 80%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 10px 45px rgba(0, 0, 0, 0.25);
+}
+
+/* Left panel */
+.hipaa-left {
+    width: 45%;
+    background: #c3dad1;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Bigger centered image */
+.hipaa-left img {
+    width: 85%;
+    max-width: 420px;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+/* Right panel */
+.hipaa-right {
+    width: 55%;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+#closeAcceptBtn {
+    width: 100%;
+    margin-top: 25px;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#closeAcceptBtn:hover {
+    background: black;
+}

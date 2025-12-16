@@ -1,0 +1,106 @@
+/*------Profile CSS-----*/
+
+#profileContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    align-items: center;
+    padding: 40px 0;
+}
+
+/* ----- for the form -----*/
+.form-box {
+    /*background-color: wheat;*/
+    background-color: rgb(227, 226, 226);
+    padding: 50px;
+    border-radius: 8px;
+    width: 90%;
+    width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- for the text -----*/
+
+.form-box h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 8px;
+
+}
+
+.small-text {
+    text-align: center;
+    font-size: 14px;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.small-text a {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+.small-text a:hover {
+    text-decoration: underline;
+}
+
+/*--- Form Inputs -----*/
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: black;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+/* ---- Button ---- */
+#saveButton {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #57b34b;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#saveButton:hover {
+    background-color: #333;
+}
+
+/* ---- Button ---- */
+#quitButton {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #000;
+    color: #e3494e;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#quitButton:hover {
+    background-color: #333;
+}

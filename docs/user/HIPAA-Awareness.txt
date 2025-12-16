@@ -1,0 +1,16 @@
+What is HIPAA?
+
+HIPAA or The Health Insurance Portability Accountability Act,
+is an act that was enacted in 1996 in the United States to protect
+sensitive patient health information(otherwise known as PHI).
+
+In this application's case, testing is conducted in a way such that
+no real patient data is being used, and this would not be used in practice unless ironed out.
+
+This also means that the test data being used to test in this AI-supported summarization,
+must be synthetic, and has to comply to HIPAA standards(Patient names get redacted).
+
+Due to the aforementioned circumstances listed aboved, this leads to using only
+fake patient summaries in order to test for HIPAA compliance, accuracy, and
+tests to make sure that functionality works accordingly in a way, such that it does not
+compromise PHI.

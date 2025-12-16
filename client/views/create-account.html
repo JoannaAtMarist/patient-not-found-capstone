@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Head-->
+
+<head>
+    <meta charset="UTF-8" name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="icon" href="/images/favicon.png" alt="Favicon">
+    <title>Patient Not Found</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/create-account.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+</head>
+
+<!--Body-->
+
+<body>
+
+    <!--Navigation Menu-->
+    <header>
+        <nav id="navmenu">
+            <img src="/images/PNF2.png" alt="Patient Not Found Logo" width="50" height="50">
+            <b>Patient Not Found</b>
+        </nav>
+    </header>
+
+    <!--- Main Container -->
+    <main id="createAccountContainer">
+        <div class="form-box">
+            <h1>Create Account</h1>
+            <p class="small-text">Already Registered? <a href="login">Login</a></p>
+
+            <!-- add required fields? maybe in JS -->
+
+            <form onsubmit="event.preventDefault(); createAccount();">
+                <label for="userName">USERNAME</label>
+                <input type="text" id="userName" placeholder="Username" aria-label="Username">
+
+                <label for="firstName">FIRST NAME</label>
+                <input type="text" id="firstName" placeholder="First Name" aria-label="First Name">
+
+                <label for="lastName">LAST NAME</label>
+                <input type="text" id="lastName" placeholder="Last Name" aria-label="Last Name">
+
+                <label for="email">EMAIL</label>
+                <input type="email" id="email" placeholder="Email" aria-label="Email">
+
+                <label for="password">PASSWORD</label>
+                <input type="passWord" id="passWord" placeholder="***********" aria-label="Password">
+
+                <label for="role-select">ROLE</label aria-label="Role">
+                <select id="role-select">
+                    <option value="">---Please Choose an Option---</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Other Clinician">Other Clinician</option>
+                    <option value="Assistant">Assistant</option>
+                    <option value="Scribe">Scribe</option>
+                    <option value="Administrator">Administrator</option>
+                </select>
+
+                <button id="createbutton" type="button" aria-label="Create Account">Create Account<br></button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="/js/global.js"></script>
+    <script type="module" src="/js/navigation.js"></script>
+    <script type="module" src="/js/create-account.js"></script>
+
+</body>
+
+
+<!--Footer-->
+<footer>
+    <center>
+        <br><br>
+        <b>(C) 2025 Patient Not Found</b>
+    </center>
+</footer>
+
+
+</html>

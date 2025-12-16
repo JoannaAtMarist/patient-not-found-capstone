@@ -1,0 +1,240 @@
+/*Background Color*/
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  /* the full size of the viewport height*/
+  /*background-color: #a3c9ad;  #C2E5D3, #B9DBE6*/
+  background-image: linear-gradient(to left, #cde8d0 0%, #c9e3da 45%, #bcdced 100%);
+  background-attachment: fixed;
+  /* should cause no repetion of the gradient*/
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+/*Navigation bar on top of webpages*/
+header {
+  background-color: rgb(227, 226, 226);
+  padding: 10px;
+  width: 100%;
+  border-bottom: solid gray .5px;
+}
+
+#navmenu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: sans-serif;
+  color: Black;
+  font-size: 40px;
+}
+
+/* login container */
+#loginContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#another {
+  background-color: #ECEDEC;
+  padding: 40px;
+  border-radius: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 320px;
+}
+
+#login-button {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#login-button:hover {
+  background-color: #f0f0f0;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: black;
+}
+
+#navbuttons {
+  text-align: right;
+}
+
+/*AI Generation Bubbles*/
+#userInputText {
+  border: 5px outset gray;
+  background-color: lightgray;
+  text-align: left;
+}
+
+#aiOutputText {
+  border: 5px outset gray;
+  background-color: lightgray;
+  text-align: left;
+}
+
+/*Edit Button*/
+#editButton {
+  text-align: right;
+}
+
+/* HTML Breadcrumbs Credit: W3Schools.com */
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background-color: #898c8a;
+}
+
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
+}
+
+ul.breadcrumb li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+ul.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}
+
+/* ---- Text input Area ----- */
+textarea {
+  width: 100%;
+  height: 150px;
+  resize: none;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ---- Button ---- */
+#download-button-doc {
+  width: 100%;
+  margin-top: 25px;
+  background-color: #1c5e0e;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#download-button-doc:hover {
+  background-color: #333;
+}
+
+/* ---- Button ---- */
+#download-button-pdf {
+  width: 100%;
+  margin-top: 25px;
+  background-color: #1f2dc2;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#download-button-pdf:hover {
+  background-color: #333;
+}
+
+/* ---- Button ---- */
+#resetChanges {
+  width: 100%;
+  margin-top: 25px;
+  background-color: darkred;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#resetChanges:hover {
+  background-color: #333;
+}
+
+/* ========= Render-style Role Pill ========= */
+.role-pill {
+  background: white;
+  padding: 6px 18px;
+  border-radius: 14px;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.role-pill-name {
+  font-weight: 700;
+  margin-bottom: -4px;
+}
+
+.role-pill-role {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+/* ========= Navigation Icon Buttons ========= */
+.nav-icon-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logout-link {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Render-style spacing */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-logo {
+  width: 55px;
+  height: 55px;
+}

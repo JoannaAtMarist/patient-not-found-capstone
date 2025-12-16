@@ -1,0 +1,269 @@
+/* =========================================
+   Patient Not Found — Swagger UI Theme
+   ========================================= */
+
+/* Page background similar to style.css gradient */
+body {
+  background-image: linear-gradient(to left, #cde8d0 0%, #c9e3da 45%, #bcdced 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  color: #222;
+}
+
+/* Hide Swagger blue bar */
+.swagger-ui .topbar {
+  display: none;
+}
+
+/* Info block styling */
+.swagger-ui .info {
+  background-color: rgb(240, 240, 240);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.swagger-ui .info h2,
+.swagger-ui .info h1 {
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+/* Section titles and tags */
+.swagger-ui .opblock-tag {
+  background-color: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.swagger-ui .opblock-tag:hover {
+  background-color: #333;
+}
+
+/* Endpoint blocks */
+.swagger-ui .opblock {
+  background-color: #f6f8fa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+}
+
+/* Buttons (Execute / Try It / Clear) */
+.swagger-ui .btn {
+  border-radius: 4px !important;
+  font-weight: bold !important;
+  transition: 0.2s;
+}
+
+.swagger-ui .btn.execute {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.swagger-ui .btn.execute:hover {
+  background-color: #333 !important;
+}
+
+.swagger-ui .btn.try-out__btn {
+  background-color: #1c5e0e !important;
+  /* green from redact buttons */
+  color: #fff !important;
+}
+
+.swagger-ui .btn.try-out__btn:hover {
+  background-color: #333 !important;
+}
+
+.swagger-ui .btn.clear {
+  background-color: #1f2dc2 !important;
+  /* blue from redact buttons */
+  color: #fff !important;
+}
+
+.swagger-ui .btn.clear:hover {
+  background-color: #333 !important;
+}
+
+/* Input boxes and textarea */
+.swagger-ui input[type="text"],
+.swagger-ui textarea,
+.swagger-ui select {
+  background-color: #f6f8fa !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  box-sizing: border-box;
+}
+
+.swagger-ui input:focus,
+.swagger-ui textarea:focus,
+.swagger-ui select:focus {
+  outline: none;
+  border-color: #888 !important;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Response boxes */
+.swagger-ui .responses-table {
+  border: 1px solid #ccc !important;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Status codes coloring consistent but softer */
+.swagger-ui .response-col_status {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Remove unnecessary gray bar for models */
+.swagger-ui .models {
+  display: none !important;
+}
+
+
+/* Scrollbar consistency */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================
+   Keep black headers & visible text/arrows
+   ========================================= */
+
+/* Restore normal flex layout but preserve our dark style */
+.swagger-ui .opblock-tag {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000 !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  padding: 10px 16px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  transition: background-color 0.2s;
+}
+
+/* Hover feedback */
+.swagger-ui .opblock-tag:hover {
+  background-color: #222 !important;
+}
+
+/* Keep description (like "User management and authentication") visible */
+.swagger-ui .opblock-tag small,
+.swagger-ui .opblock-tag .markdown p {
+  display: inline !important;
+  color: #ccc !important;
+  margin-left: 10px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+/* Restore arrow icon */
+.swagger-ui .opblock-tag svg {
+  fill: #fff !important;
+  margin-left: auto;
+}
+
+/* Section spacing */
+.swagger-ui .opblock-tag-section {
+  margin-bottom: 12px !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* When section is expanded, keep tag header dark and content light */
+.swagger-ui .opblock.is-open .opblock-tag {
+  background-color: #111 !important;
+}
+
+/* Keep endpoint blocks bright and readable inside */
+.swagger-ui .opblock.is-open {
+  background-color: #f6f8fa !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+}
+
+/* Keep method labels readable */
+.swagger-ui .opblock-summary-method {
+  color: #fff !important;
+  font-weight: bold !important;
+  border-radius: 4px !important;
+  padding: 3px 8px !important;
+}
+
+/* Minor touch: space between collapsed groups */
+.swagger-ui .opblock-tag+.opblock-tag {
+  margin-top: 4px;
+}
+
+
+
+/* Force all route boxes to use their expanded background color */
+.swagger-ui .opblock {
+  background-color: #f6f8fa !important;
+  /* same color used when open */
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional: slightly darken border on hover */
+.swagger-ui .opblock:hover {
+  border-color: #aaa !important;
+}
+
+/* Keep the method labels (GET/POST/etc.) colored normally */
+.swagger-ui .opblock-summary-method {
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
+/* Maintain color consistency for opened blocks */
+.swagger-ui .opblock.is-open {
+  background-color: #f6f8fa !important;
+}
+
+
+/* Match the scheme container (Servers dropdown + Authorize) to title bar */
+.swagger-ui .scheme-container {
+  background-color: rgb(240, 240, 240) !important;
+  /* same as .info background */
+  border: none !important;
+  box-shadow: none !important;
+  padding: 15px 30px !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+/* Optional — style the “Servers” label to blend better */
+.swagger-ui .scheme-container label {
+  color: #222 !important;
+  font-weight: 600 !important;
+}
+
+/* Optional — tweak dropdown to fit */
+.swagger-ui .scheme-container select {
+  background-color: #f6f8fa !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+}

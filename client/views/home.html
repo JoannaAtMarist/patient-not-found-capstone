@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="icon" href="/images/favicon.png" alt="Favicon">
+    <title>Patient Not Found</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+</head>
+
+<body>
+
+    <!--Navigation Menu-->
+    <header>
+        <nav id="navmenu">
+            <!--Navigation JavaScript file-->
+            <script type="module" src="/js/navigation.js"></script>
+        </nav>
+
+    </header>
+    <!-- HIPAA MODAL OVERLAY -->
+    <div id="hipaaOverlay">
+        <div id="hipaaCard">
+
+            <!-- LEFT PANEL -->
+            <div class="hipaa-left">
+                <img src="/images/hipaa-art.jpeg" alt="Illustration">
+                <h2>Patient Safety First</h2>
+                <br>Learn how we keep testing HIPAA-compliant</br>
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="hipaa-right">
+                <h1>Attention Users!</h1>
+                <p>Before using Patient Not Found, please read the following:</p>
+
+                <h3>What is HIPAA?</h3>
+                <p>
+                    HIPAA or The Health Insurance Portability Accountability Act,
+                    is an act that was enacted in 1996 in the United States to protect
+                    sensitive patient health information (otherwise known as PHI).
+                </p>
+
+                <p>
+                    In this application's case, testing is conducted in a way such that
+                    no real patient data is being used. This application is not meant to be used in a real-world
+                    scenario, unless it is ironed out.
+                </p>
+
+                <p>
+                    This also means that the data being used to test in this AI-supported summarizer
+                    must be synthetic, and has to comply to HIPAA standards (ie. Patient names get redacted).
+                </p>
+
+                <p>
+                    Due to the aforementioned circumstances listed above, this means that you are strongly limited to
+                    fake patient summaries in order to test for HIPAA compliance, accuracy, and
+                    tests to make sure that functionality works accordingly in a way, such that it does not
+                    compromise PHI.
+                </p>
+
+                <p>
+                    All summaries must use fake data during testing to ensure compliance and accuracy.
+                </p>
+
+                <button id="closeAcceptBtn">Close and Accept</button>
+            </div>
+
+        </div>
+    </div>
+
+    <center>
+        <!-- <br><br>
+        Hipaa Section, can be dismissed after reading
+        <div id="hipaaDiv">
+            <h1>Attention Users!</h1>
+            Before using Patient Not Found, Please read the following:<br>
+            <br><b>What is HIPAA?</b><br>
+
+            HIPAA or The Health Insurance Portability Accountability Act,
+            is an act that was enacted in 1996 in the United States to protect
+            sensitive patient health information (otherwise known as PHI).<br>
+            <br>In this application's case, testing is conducted in a way such that
+            no real patient data is being used. This application is not meant to be used in a real-world scenario,
+            unless it is ironed out.<br>
+            <br>This also means that the data being used to test in this AI-supported summarizer
+            must be synthetic, and has to comply to HIPAA standards (ie. Patient names get redacted).<br>
+            <br>Due to the aforementioned circumstances listed above, this means that you are strongly limited to
+            fake patient summaries in order to test for HIPAA compliance, accuracy, and
+            tests to make sure that functionality works accordingly in a way, such that it does not
+            compromise PHI.<br>
+            <br>Once you're done reading, click <b>"Close and Accept"</b> to dismiss this message.
+            <br><br><button id="closeButton">Close and Accept</button><br><br>
+        </div> -->
+
+        <!--Action Button Div-->
+        <div class="actionButtons">
+            <h1 id="userHeader"><b>Welcome Back, User.</b></h1>
+            What would you like to do today?<br><br>
+
+            <!--New Summary Button-->
+            <button type="button" id="summaryButton">
+                <img width="70" height="70" src="https://static.thenounproject.com/png/261370-200.png"
+                    alt="Create New Summary Button" aria-label="Create New Summary">
+                <br>Create New Summary
+            </button>
+
+            <!--Account Menu-->
+            <button onclick="goProfile()" type="button" id="accountButton">
+                <img width="70" height="70" src="/images/setting.png" alt="Go To Account Settings Button" aria-label="Go to Account Settings"><br>Go to
+                Account Settings
+            </button><br><br>
+            <!-- Feedback -->
+            <!--<button type="button" id="provideFeedbackButton">
+                <img width="70" height="70" src="https://static.thenounproject.com/png/1477789-200.png"
+                    alt="Provide Feedback Button" aria-label="Feedback Page"><br>Provide Feedback<br>
+            </button>-->
+        </div>
+    </center>
+
+    <center>
+        <section id="admin-dashboard"><br>
+
+            <h1>Administrator-Specific Tools</h1>
+
+            <!--Admin Dashboard-->
+            <button onclick="goAdmin()" type="button" id="accountButton">
+                <img width="70" height="70" src="/images/admin.png" alt="Admin Dashboard Button" aria-label="Admin Dashboard"><br>Admin Dashboard
+            </button>
+
+            <!--Fallback JS in case goAdmin has undefined issue-->
+            <script>
+                async function goAdmin() {
+                    console.log("[PNF] Navigating to Admin Dashboard...");
+                    await Promise.resolve();
+                    location.replace("./admin-dashboard"); //Note. Route does NOT exist yet.
+                    //location.replace("../views/admin-dashboard.html");
+                }
+            </script>
+        </section>
+    </center>
+
+    <script type="module" src="/js/global.js"></script>
+    <script type="module" src="/js/navigation.js"></script>
+    <script type="module" src="/js/home.js"></script>
+
+</body>
+
+<footer>
+    <center><br><br>
+        <b>(C) 2025 Patient Not Found</b>
+    </center>
+</footer>
+
+</html>

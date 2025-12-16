@@ -1,0 +1,14 @@
+/* Page background similar to style.css gradient */
+body {
+  background-image: linear-gradient(to left, #cde8d0 0%, #c9e3da 45%, #bcdced 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  color: #222;
+}
+
+/* Hide Swagger blue bar */
+.swagger-ui .topbar {
+  display: none;
+}

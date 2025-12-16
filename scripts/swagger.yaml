@@ -1,0 +1,919 @@
+openapi: 3.0.0
+info:
+  title: Doctor Note Summarizer API
+  version: 1.1.1
+  description: >
+    Prototype API for summarizing, redacting, and exporting doctor notes.
+    Supports JSON and raw text input. Authentication is handled via Auth0
+    (OIDC) plus an Express session cookie.
+
+tags:
+  - name: Accounts – Authentication
+    description: Login, logout, and session status (Auth0 + sessions)
+  - name: Accounts – Management
+    description: Registration and account management in MongoDB
+  - name: Administration
+    description: Admin-only features like audit logging
+  - name: AI
+    description: AI summarization and redaction endpoints
+  - name: Files
+    description: File upload and extraction endpoints
+  - name: Configuration
+    description: Environment and AI mode introspection
+
+servers:
+  - url: http://localhost:3000
+
+security:
+  - cookieAuth: []
+
+paths:
+  # ─────────────────────────────────────────────────────────────
+  # AUTH0 FLOW (non-JSON, but important for login semantics)
+  # ─────────────────────────────────────────────────────────────
+  /login:
+    get:
+      summary: Start login flow (Auth0)
+      tags: [Accounts – Authentication]
+      security: []
+      description: >
+        Starts the login flow.  
+        In `dev` mode this serves a local `login.html` page.  
+        In `standard` mode this redirects to Auth0, then returns to `/home`.
+      responses:
+        "302":
+          description: Redirect to Auth0 or login page
+
+  /callback:
+    get:
+      summary: Auth0 callback
+      tags: [Accounts – Authentication]
+      security: []
+      description: >
+        Auth0 callback endpoint.  
+        Exchanges the authorization code, creates the Express session user,
+        and redirects to `/landing` (or another configured page).
+      responses:
+        "302":
+          description: Redirect after successful login
+        "500":
+          description: Login callback failed
+
+  /logout:
+    get:
+      summary: Log out current user (redirect)
+      tags: [Accounts – Authentication]
+      description: >
+        Logs out the current user using Auth0 and clears the Express session.
+        Redirects the browser after logout.
+      responses:
+        "302":
+          description: Redirect after logout
+    post:
+      summary: Log out current user (JSON-friendly)
+      tags: [Accounts – Authentication]
+      description: >
+        Same logout behavior as GET `/logout`, but more convenient for
+        programmatic use.
+      responses:
+        "200":
+          description: Logout result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "User logged out successfully"
+        "500":
+          description: Logout failed
+
+  # ─────────────────────────────────────────────────────────────
+  # SESSION STATUS
+  # ─────────────────────────────────────────────────────────────
+  /api/session/status:
+    get:
+      summary: Check current session status
+      tags: [Accounts – Authentication]
+      description: >
+        Returns whether there is an active session and, if so, the session user.
+        A valid session requires both an Express `req.session.user` and a
+        valid OIDC Auth0 login.
+      responses:
+        "200":
+          description: Session info
+          content:
+            application/json:
+              examples:
+                loggedIn:
+                  summary: Logged in
+                  value:
+                    loggedIn: true
+                    user:
+                      id: "67123456789"
+                      username: "bingo"
+                      role: "Administrator"
+                notLoggedIn:
+                  summary: Not logged in
+                  value:
+                    loggedIn: false
+                    message: "No active session"
+
+  # ─────────────────────────────────────────────────────────────
+  # CONFIG / MODE
+  # ─────────────────────────────────────────────────────────────
+  /api/config:
+    get:
+      summary: Get current AI configuration
+      tags: [Configuration]
+      security: []
+      description: >
+        Returns the current AI provider mode (e.g., `openai` vs `local`)
+        as configured via environment variables.
+      responses:
+        "200":
+          description: AI config
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  AI_MODE:
+                    type: string
+                    example: openai
+
+  /api/mode:
+    get:
+      summary: Get current application mode
+      tags: [Configuration]
+      security: []
+      description: >
+        Returns the current app mode (`standard`, `dev`, or `prototype`),
+        as determined by APP_MODE and related environment values.
+      responses:
+        "200":
+          description: Application mode
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mode:
+                    type: string
+                    example: standard
+
+  # ─────────────────────────────────────────────────────────────
+  # AI SUMMARIZATION
+  # ─────────────────────────────────────────────────────────────
+  /api/summarize:
+    post:
+      summary: Summarize a doctor note using the current AI_MODE
+      security: []
+      tags: [AI]
+      description: >
+        Universal summarization endpoint.  
+        Uses `AI_MODE` to decide between OpenAI cloud and local Phi-4.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+          text/plain:
+            schema:
+              type: string
+              example: "Patient presents with persistent cough x3 weeks..."
+      responses:
+        "200":
+          description: Summary generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummaryResult'
+                properties:
+                  summary:
+                    type: string
+                  allergies:
+                    type: string
+        "400":
+          description: Missing note in request
+          content:
+            application/json:
+              example:
+                error: "Missing note in request"
+        "500":
+          description: Summarization failed
+          content:
+            application/json:
+              example:
+                error: "Summarization failed"
+
+  /api/summarize/openai:
+    post:
+      summary: Summarize a doctor note with OpenAI (cloud)
+      security: []
+      tags: [AI]
+      description: >
+        Forces use of the OpenAI cloud model regardless of `AI_MODE`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+          text/plain:
+            schema:
+              type: string
+              example: "Patient presents with persistent cough x3 weeks..."
+      responses:
+        "200":
+          description: Summary generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummaryResult'
+                properties:
+                  summary:
+                    type: string
+                  allergies:
+                    type: string
+        "400":
+          description: Missing note in request
+        "500":
+          description: Summarization failed
+
+  /api/summarize/pipeline:
+    post:
+      summary: Full pipeline – validate, redact, summarize, reintegrate
+      security: []
+      tags: [AI]
+      description: >
+        Runs the full pipeline for a single note:  
+        validate doctor note -> redact PHI -> summarize -> reintegrate.  
+        Returns a structure including redacted text, summary, allergies,
+        and final merged output.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+          text/plain:
+            schema:
+              type: string
+              example: "Patient presents with persistent cough x3 weeks..."
+      responses:
+        "200":
+          description: Pipeline completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PipelineResultItem"
+        "400":
+          description: Missing note in request
+          content:
+            application/json:
+              example:
+                error: "Missing note in request"
+        "500":
+          description: Pipeline summarization failed
+          content:
+            application/json:
+              example:
+                error: "Pipeline summarization failed"
+
+  /api/summarize/pipeline/multi:
+    post:
+      summary: Process multiple notes through the full pipeline
+      security: []
+      tags: [AI]
+      description: >
+        Accepts an array of notes (`{ id, name, text }`) or uses notes stored
+        in the session after `/api/upload`.  
+        Returns an *array* of per-note pipeline results, preserving order.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MultiNoteInput"
+      responses:
+        "200":
+          description: Multi-file pipeline completed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PipelineResultItem"
+        "400":
+          description: No notes provided
+          content:
+            application/json:
+              example:
+                error: "No notes provided. Upload files first or send { notes: [{id, name, text}, ...] }."
+        "500":
+          description: Pipeline failure
+          content:
+            application/json:
+              example:
+                error: "Multi-file pipeline failed"
+
+  /api/summarize/phi4:
+    post:
+      summary: Summarize a doctor note with local Phi-4 (Ollama)
+      security: []
+      tags: [AI]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+          text/plain:
+            schema:
+              type: string
+      responses:
+        "200":
+          description: Summary result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+        "400":
+          description: Missing note in request
+        "500":
+          description: Summarization failed
+
+  /api/summarize/phi4-mini:
+    post:
+      summary: Summarize a doctor note with local Phi-4-mini (Ollama)
+      security: []
+      tags: [AI]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+          text/plain:
+            schema:
+              type: string
+      responses:
+        "200":
+          description: Summary result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+        "400":
+          description: Missing note in request
+        "500":
+          description: Summarization failed
+
+  # ─────────────────────────────────────────────────────────────
+  # REDACTION
+  # ─────────────────────────────────────────────────────────────
+  /api/redact:
+    post:
+      summary: Redact PHI from a doctor note
+      security: []
+      tags: [AI]
+      description: >
+        Runs the redaction pipeline step only (no summarization).  
+        Used internally by the full pipeline and available for testing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteInput'
+          text/plain:
+            schema:
+              type: string
+      responses:
+        "200":
+          description: Redaction successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  redacted:
+                    type: string
+        "400":
+          description: Missing note in request
+        "500":
+          description: Redaction failed
+
+  # ─────────────────────────────────────────────────────────────
+  # FILE UPLOAD (multi-note)
+  # ─────────────────────────────────────────────────────────────
+  /api/upload:
+    post:
+      summary: Upload multiple note files and extract text
+      security: []
+      tags: [Files]
+      description: >
+        Accepts up to 5 files (`.txt`, `.doc`, `.docx`).  
+        Extracts text from each file (using Mammoth / pdf-parse where applicable),
+        stores the extracted text in the session, and returns basic file info.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                notes:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        "200":
+          description: Files uploaded and text extracted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "3 file(s) uploaded successfully."
+                  files:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        original:
+                          type: string
+                          example: "note1.docx"
+                        path:
+                          type: string
+                          description: Server-side path of stored file
+                        sizeKB:
+                          type: string
+                          example: "42.1"
+        "500":
+          description: Error processing files
+
+  # ─────────────────────────────────────────────────────────────
+  # USER ACCOUNTS (Auth0-backed Mongo records)
+  # ─────────────────────────────────────────────────────────────
+  /api/users:
+    get:
+      summary: Get all user accounts (Admin-only)
+      tags: [Accounts – Management]
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: A list of all registered users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "403":
+          description: Forbidden (non-admin)
+        "500":
+          description: Server error
+    post:
+      summary: Create a new user account
+      security: []
+      tags: [Accounts – Management]
+      description: >
+        Creates a new MongoDB user record (typically triggered from the
+        backend after a successful Auth0 login).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewUser"
+      responses:
+        "201":
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              example:
+                message: "Username and password are required"
+        "409":
+          description: Duplicate username
+          content:
+            application/json:
+              example:
+                message: "Username already taken"
+        "500":
+          description: Server error
+
+  /api/users/{id}:
+    get:
+      summary: Get a user by ID
+      tags: [Accounts – Management]
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Account found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              example:
+                message: "Account not found"
+    patch:
+      summary: Update user information
+      tags: [Accounts – Management]
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        "200":
+          description: Account updated
+          content:
+            application/json:
+              example:
+                message: "Account updated successfully"
+        "404":
+          description: Account not found
+    delete:
+      summary: Delete a user by ID
+      tags: [Accounts – Management]
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Account deleted
+          content:
+            application/json:
+              example:
+                message: "Account deleted successfully"
+        "404":
+          description: Account not found
+
+  # ─────────────────────────────────────────────────────────────
+  # AUDIT LOGS
+  # ─────────────────────────────────────────────────────────────
+  /api/audit/logs:
+    get:
+      summary: Retrieve audit logs (Admin only)
+      description: |
+        Returns a list of recent audit log entries from the log file.  
+        Only users with the **Administrator** role can access this endpoint.
+      tags:
+        - Administration
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of log entries to return (default 200)
+          required: false
+          schema:
+            type: integer
+            default: 200
+      responses:
+        "200":
+          description: Audit logs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  count:
+                    type: integer
+                    example: 10
+                  logs:
+                    type: array
+                    items:
+                      type: object
+                      description: Single audit log entry (shape may vary)
+        "403":
+          description: Access denied (non-admin user)
+        "500":
+          description: Server error retrieving audit logs
+
+  /api/audit/log:
+    post:
+      summary: Add a new audit log entry manually (testing)
+      tags:
+        - Administration
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: manual
+                message:
+                  type: string
+                  example: "Manual audit entry from Swagger"
+                context:
+                  type: string
+                  example: "swagger-test"
+      responses:
+        "200":
+          description: Audit entry created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Audit entry recorded."
+        "500":
+          description: Failed to create audit entry
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: connect.sid
+      description: >
+        Session-based authentication.  
+        This uses the Express session cookie (`connect.sid`).  
+        After logging in via `/login` (Auth0), Swagger will send your
+        session cookie with subsequent API requests.
+
+  schemas:
+    NoteInput:
+      type: object
+      properties:
+        note:
+          type: string
+      example:
+        note: >
+          Patient: Jyn Papaver, 22F with persistent cough for 3 weeks...
+
+    MultiNoteInput:
+      type: object
+      properties:
+        notes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "file-1"
+              name:
+                type: string
+                example: "patient-note-1.docx"
+              text:
+                type: string
+                example: "Patient presents with persistent cough x3 weeks..."
+      required: [notes]
+      example:
+        notes:
+          - id: "file-1"
+            name: "note1.docx"
+            text: "Patient presents with persistent cough x3 weeks..."
+          - id: "file-2"
+            name: "note2.docx"
+            text: "Another note here..."
+
+    PipelineResultItem:
+      type: object
+      description: Result of running a single note through the full pipeline
+      properties:
+        ok:
+          type: boolean
+          description: Whether the pipeline succeeded for this note
+        id:
+          type: string
+          example: "file-1"
+        name:
+          type: string
+          example: "note1.docx"
+        index:
+          type: integer
+          example: 0
+        redacted:
+          type: string
+        summary:
+          type: string
+        allergies:
+          type: string
+        final:
+          type: string
+        highlights:
+          type: array
+          items:
+            $ref: '#/components/schemas/HighlightItem'
+        confidence_flags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfidenceFlag'
+        error:
+          type: string
+          description: Error message if `ok` is false
+
+
+    SummaryEditRequest:
+      type: object
+      properties:
+        summary:
+          type: string
+      required: [summary]
+
+    HighlightItem:
+      type: object
+      description: Link between a summary sentence and the supporting source text
+      properties:
+        summary_sentence:
+          type: string
+          description: The sentence from the generated summary
+        source_quote:
+          type: string
+          description: Exact supporting phrase from the original note
+        location:
+          type: string
+          description: Location hint (e.g., "sentence 1", "sentence 3")
+
+    ConfidenceFlag:
+      type: object
+      description: Confidence rating for a summary sentence
+      properties:
+        sentence:
+          type: string
+          description: The sentence from the summary
+        confidence:
+          type: string
+          description: Confidence level for this sentence
+          enum: [high, medium, low]
+
+    SummaryResult:
+      type: object
+      description: Standard summarization result returned by AI endpoints
+      properties:
+        summary:
+          type: string
+        allergies:
+          type: string
+        highlights:
+          type: array
+          items:
+            $ref: '#/components/schemas/HighlightItem'
+        confidence_flags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfidenceFlag'
+
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 6708f17e43...
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Doe
+        username:
+          type: string
+          example: bingo
+        organization:
+          type: string
+          example: Marist University
+        role:
+          type: string
+          enum: [Doctor, Administrator, Assistant]
+          example: Doctor
+
+    NewUser:
+      type: object
+      required: [firstName, lastName, username, password]
+      properties:
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Doe
+        username:
+          type: string
+          example: bingo
+        password:
+          type: string
+          example: test123
+        organization:
+          type: string
+          example: Marist University
+        role:
+          type: string
+          enum: [Doctor, Administrator, Assistant]
+          example: Doctor
+
+    UserResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Account created successfully
+        account:
+          $ref: "#/components/schemas/User"
+
+    LoginRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+
+    NewPassword:
+      type: object
+      required: [username, newPassword, confirmNewPassword]
+      properties:
+        username:
+          type: string
+          example: DetectiveHandyman
+        newPassword:
+          type: string
+          example: thenewpassword
+        confirmNewPassword:
+          type: string
+          example: thenewpassword

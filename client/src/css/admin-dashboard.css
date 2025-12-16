@@ -1,0 +1,66 @@
+/* =========================================
+   Patient Not Found – Admin Dashboard Page
+   Matches mockup + locks layout between local/server
+   ========================================= */
+
+/* ---- Container ---- */
+#adminContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* ---- 404 Box ---- */
+#adminBox {
+    background-color: rgb(227, 226, 226);
+    padding: 50px;
+    border-radius: 8px;
+
+    /* mockup-matched sizing */
+    width: 500px;
+    height: 370px;
+    max-width: 500px;
+    min-height: 370px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    /* prevent flex auto-resizing */
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ---- Title ---- */
+#adminBox h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* ---- Input Fields ---- */
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color:black;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+    background-color: #f6f8fa;
+    /* neutral gray, matches mockup */
+}

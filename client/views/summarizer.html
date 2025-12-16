@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="icon" href="/images/favicon.png" alt="Favicon">
+    <title>Patient Not Found</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/redactPHI.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+    <link rel="stylesheet" href="/css/hider.css">
+
+
+    <!-- jsPDF for PDF export (global, non-module) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav id="navmenu">
+            <script type="module" src="/js/navigation.js"></script>
+        </nav>
+    </header>
+
+    <main id="redactContainer">
+        <div class="redact-box">
+            <h1>Generate Summary</h1>
+            <p class="small-text">Paste text or upload one or more files below.</p>
+
+            <!-- Text Input Area -->
+            <label for="textInput">Paste Text Here</label>
+            <textarea id="textInput" placeholder="Paste or type patient information here..."></textarea>
+            <p>OR</p>
+
+            <!-- File Upload -->
+            <label for="fileUpload" class="file-label">Upload A File</label>
+            <input type="file" id="fileUpload" name="notes" multiple accept=".pdf, .docx, .json, .txt">
+
+            <!-- Redact + Summarize Button -->
+            <button id="redactButton">Redact &amp; Summarize</button>
+
+            <!-- Spinner -->
+            <div id="loadingSpinner" class="hidden">
+                <div class="spinner"></div>
+                <p>Processing note(s)...</p>
+            </div>
+
+            <!-- Main Output -->
+            <div id="outputBox">
+                <h2>Redacted + Summary Output</h2>
+                <textarea id="redactedText" placeholder="Redacted text and summary will appear here..."></textarea>
+            </div>
+
+            <br><br>
+            <button id="download-button-doc">Download Summary (.doc)</button>
+            <br><br>
+            <button id="download-button-pdf">Download Summary (.pdf)</button>
+            <br><br>
+            <button id="download-button-json">Download Summary (.json)</button>
+            <br><br>
+            <button id="resetChanges">Undo Changes</button>
+
+        </div>
+    </main>
+
+    <!-- JS -->
+    <script type="module" src="/js/global.js"></script>
+    <script type="module" src="/js/navigation.js"></script>
+    <script type="module" src="/js/file-handler.js"></script>
+    <script type="module" src="/js/summarizer.js"></script>
+
+</body>
+
+<footer>
+    <br><br>
+    <center><b>(C) 2025 Patient Not Found</b></center>
+</footer>
+
+</html>

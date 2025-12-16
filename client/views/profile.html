@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Head-->
+
+<head>
+    <meta charset="UTF-8" name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="icon" href="/images/favicon.png" alt="Favicon">
+    <title>Patient Not Found</title>
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+
+</head>
+
+
+
+<!--Body-->
+
+<body>
+
+    <!--Navigation Menu-->
+    <header>
+        <nav id="navmenu"></nav>
+    </header>
+
+    <!--- Main Container -->
+    <main id="profileContainer">
+        <div class="form-box">
+            <h1>Profile Settings</h1>
+
+            <form onsubmit="event.preventDefault(); gohome();">
+                <label for="userName">USERNAME</label>
+                <input type="text" id="userName" placeholder="Username" aria-label="Username">
+
+                <label for="firstName">FIRST NAME</label>
+                <input type="text" id="firstName" placeholder="First Name" aria-label="First Name">
+
+                <label for="LastName">LAST NAME</label>
+                <input type="text" id="lastName" placeholder="Last Name" aria-label="Last Name">
+
+                <label for="email">EMAIL</label>
+                <input type="email" id="email" placeholder="Email" aria-label="Email">
+
+                <!--Save and Exit-->
+                <button id="saveButton" type="button" aria-label="Save Account Changes">Save and Exit</button>
+
+                <!--Quit Without Saving-->
+                <button id="quitButton" type="button" aria-label="Undo Account Changes">Quit Without Saving</button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="/js/global.js"></script>
+    <script type="module" src="/js/navigation.js"></script>
+    <script type="module" src="/js/profile.js"></script>
+
+</body>
+
+
+<!--Footer-->
+<footer>
+    <center>
+        <br><br>
+        <b>(C) 2025 Patient Not Found</b>
+    </center>
+
+</footer>
+
+
+</html>

@@ -1,0 +1,579 @@
+/*------Create Account CSS-----*/
+#redactContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    justify-content: flex-start;
+    padding: 40px 0;
+    gap: 30px;
+}
+
+.redact-box {
+    background-color: #e9e9e9;
+    padding: 50px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.redact-box h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+
+}
+
+.small-text {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 25px;
+
+}
+
+/* ---- Text input Area ----- */
+textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* --- File Upload */
+.file-label {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-label:focus {
+    outline: 2px solid #0e49eb; 
+}
+
+#fileUpload {
+    display: none;
+}
+
+
+#redactButton {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#redactButton:hover {
+    background-color: #333;
+}
+#redactButton:focus {
+    outline: 2px solid #0e49eb; 
+}
+
+#redactButton2 {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#redactButton2:hover {
+    background-color: #333;
+}
+
+#redactButton2:focus {
+    outline: 2px solid #0e49eb; 
+}
+
+#redactButton3 {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#redactButton3:hover {
+    background-color: #333;
+}
+
+#redactButton3:focus {
+    outline: 2px solid #0e49eb; 
+}
+
+#loadingSpinner {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Output Box*/
+
+#outputBox {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 30px;
+    padding: 25px;
+    width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+#outputBox h2 {
+    font-size: 22px;
+    margin-top: 0;
+}
+
+#redactedText {
+    font-size: 16px;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+/*Responsive*/
+@media(max-width: 600px) {
+
+    .redact-box,
+    #outputBox {
+        padding: 30px;
+    }
+
+    textarea {
+        height: 120px;
+    }
+}
+
+
+/* ---- Button ---- */
+#download-button-doc {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1c5e0e;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-doc:hover {
+    background-color: #333;
+}
+
+#download-button-doc:focus {
+    outline: 2px solid #000; 
+}
+
+#download-button-doc2 {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1c5e0e;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-doc2:hover {
+    background-color: #333;
+}
+
+#download-button-doc2:focus {
+    outline: 2px solid #000; 
+}
+
+#download-button-doc3 {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1c5e0e;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-doc3:hover {
+    background-color: #333;
+}
+
+#download-button-doc3:focus {
+    outline: 2px solid #000; 
+}
+
+/* ---- Button ---- */
+#download-button-pdf {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1f2dc2;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-pdf:hover {
+    background-color: #333;
+}
+
+#download-button-pdf:focus {
+    outline: 2px solid #000; 
+}
+
+#download-button-pdf2 {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1f2dc2;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-pdf2:hover {
+    background-color: #333;
+}
+
+#download-button-pdf2:focus {
+    outline: 2px solid #000; 
+}
+
+#download-button-pdf3 {
+    width: 100%;
+    margin-top: 25px;
+    background-color: #1f2dc2;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#download-button-pdf3:hover {
+    background-color: #333;
+}
+
+#download-button-pdf3:focus {
+    outline: 2px solid #000; 
+}
+
+#outputBox {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 30px;
+    padding: 25px;
+
+    /* --- Responsive Width --- */
+    width: 100%;
+    max-width: min(95vw, 1200px);   /* large screen limit */
+    box-sizing: border-box;
+
+    /* --- Responsive Height --- */
+    min-height: 200px;               /* guarantee visible box */
+    max-height: none;                /* allow unlimited growth */
+    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow-wrap: break-word;
+}
+
+/* ---- 2nd Reset Button ---- */
+#resetChanges2 {
+  width: 100%;
+  margin-top: 25px;
+  background-color: darkred;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#resetChanges2:hover {
+  background-color: #333;
+}
+
+/* ---- 3rd Reset Button ---- */
+#resetChanges3 {
+  width: 100%;
+  margin-top: 25px;
+  background-color: darkred;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#resetChanges3:hover {
+  background-color: #333;
+}
+
+/* The following was moved out of the html file and to the css file */
+/* TABS – styled to match Alondra’s design language */
+#tabContainer {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: #d4d4d4;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+}
+
+.tab-btn.active {
+    background: #e9e9e9;
+    border-bottom: 3px solid black;
+}
+
+.tab-content {
+    background: #e9e9e9;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    width: 100%;
+    height: 180px;
+    resize: vertical;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    background: black;
+    color: white;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* TAB BAR LAYOUT */
+.tab-buttons {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid #9c9c9c;
+    padding-left: 5px;
+}
+
+/* FILE FOLDER TAB STYLE */
+.tab-btn {
+    position: relative;
+    top: 2px;
+    padding: 12px 20px;
+    background: #dcdcdc;
+    /* neutral gray, matches theme */
+    border: 1px solid #b4b4b4;
+    border-bottom: none;
+    /* makes the “tab” look attached */
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 4px;
+
+    /* subtle “file folder raised” effect */
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ACTIVE TAB – appears on top like a selected folder */
+.tab-btn.active {
+    background: #e9e9e9;
+    /* brighter, matches content box */
+    border-bottom: 2px solid #e9e9e9;
+    /* blends seamlessly */
+    z-index: 3;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* CONTENT BOX */
+.tab-content {
+    background: #e9e9e9;
+    padding: 25px;
+    border: 1px solid #b4b4b4;
+    border-radius: 0 8px 8px 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: -1px;
+    /* lifts panel up so it touches active tab */
+}
+
+/* Hide */
+.hidden {
+    display: none;
+}
+
+/* The switch container */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide the default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider (visual track) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+    /* For rounded corners */
+}
+
+/* The slider before (the movable thumb) */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+    /* For a circular thumb */
+}
+
+/* When the checkbox is checked, change background color of the slider */
+input:checked+.slider {
+    background-color: #49de23;
+}
+
+/* When the checkbox is checked, move the slider thumb */
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Optional: For rounded slider track */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* light styles for the highlight + confidence panels */
+.analysis-panels { margin-top: 16px; display: grid; gap: 12px; }
+.analysis-panels h4 { margin: 6px 0; }
+.source-box { background:#fff; border:1px solid #ccc; border-radius:6px; padding:12px; }
+.confidence-box { background:#fff; border:1px solid #ccc; border-radius:6px; padding:12px; }
+.flag { padding:6px 8px; border-radius:4px; margin:4px 0; }
+.flag.ok { background:#eef8ee; border:1px solid #cfe9cf; }
+.flag.low { background:#fff5e6; border:1px solid #ffd199; }
+mark { background:#fff89a; padding:0 .15em; border-radius:2px; }
+.feature-toggles { display:flex; gap:16px; align-items:center; margin:10px 0 0 0; }
+.placeholder-text { color:#555; font-style:italic; }
+.confidence-box .flag { word-break: break-word; }
+

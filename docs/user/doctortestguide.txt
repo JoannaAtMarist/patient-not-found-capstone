@@ -1,0 +1,13 @@
+Follow the protocol below in order to test properly with this application.
+Use ONLY Synthetic notes.
+
+1. Login with your account(or create an account if you do not have one.)
+2. Select the "Create New Summary" button.
+3. Input the patient summary information in the above text field via file or text.
+4. Press the "Redact PHI" button in order to generate your summary.
+5. You can download the summary in Microsoft Word or PDF format.
+6. To adjust the generated summary, press the "Edit Summary" button.
+7. Within the Summary Editor, you are able to alter the AI-Generated summary alongside your inputted information.
+8. You can export the information in .doc or .pdf format.
+9. You can press the Undo Changes button in order to reset the information back to the original text.
+10. You may Logout or go back to the home page(by pressing the logo icon), to test again.

@@ -1,0 +1,7 @@
+What should happen if AI fails?
+1. Display an error to the user to say that AI summarization failed.
+2. If it is caused by Timeout error(if this is identifiable), say this instead
+3. Preserve the original note that the user inputted, to not wipe out their progress.
+4. Ensure that the user is able to retry again afterwards.
+5. Provide a potential tip to wait a bit, and then retry again
+6. (For Developers) Debug the error, if it is identifiable, throw it into the defect log
