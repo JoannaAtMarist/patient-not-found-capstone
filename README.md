@@ -102,5 +102,7 @@ See `/docs/` for system design, requirements, and deployment notes.
 **Faculty Advisor:** Professor Juan Arias
 
 ## License
-Educational use only.
-
+Educational capstone prototype (Marist University).  
+Viewing is welcome. Reuse/redistribution/deployment requires permission.  
+Not HIPAA compliant; do not use with real PHI.  
+For reuse/permission requests, email: joannapicciano [at] gmail [dot] com.  
