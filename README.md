@@ -57,7 +57,7 @@ This project followed a rigorous planning lifecycle to manage scope and technica
 * **Risk Management:** The project plan was iteratively updated to adapt to changing technical constraints and development velocity.  
 
 ## Tech Stack
-Node.js + Express · Frontend JS/HTML/CSS (Patrick’s layout) · MongoDB (Mongoose) · Auth0 (OIDC) · OpenAI API · Swagger UI
+Node.js + Express · Frontend JS/HTML/CSS · MongoDB (Mongoose) · Auth0 (OIDC) · OpenAI API · Swagger UI
 
 ## Quickstart
 ```bash
