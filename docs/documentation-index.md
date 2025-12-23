@@ -18,6 +18,7 @@
   - [3.4. System Architecture](#34-system-architecture)
   - [3.5. Technology Stack](#35-technology-stack)  
   - [3.6. Security, Privacy, and Compliance](#36-security-privacy-and-compliance)
+    - [3.6.1 Security Controls Not Implemented (Prototype Limits)](#361-security-controls-not-implemented-prototype-limits)
 - [4. Data Design](#4-data-design)
 - [5. Implementation Details](#5-implementation-details)
   - [5.1. Development Methodology](#51-development-methodology)
@@ -27,15 +28,19 @@
 - [6. Testing and Quality Assurance](#6-testing-and-quality-assurance)
   - [6.1. Testing Approach](#61-testing-approach)
   - [6.2. Sample Test Case](#62-sample-test-case)
-  - [6.3. Tools](#63-tools)
+  - [6.3. Tools](#63-tools)  
+  - [6.4. Automated Testing Gaps and Next Steps](#64-automated-testing-gaps-and-next-steps)
 - [7. Deployment](#7-deployment)
   - [7.1. Setup and Installation](#71-setup-and-installation)
   - [7.2. Environment Variables](#72-environment-variables)
   - [7.3. Deployment Notes](#73-deployment-notes)
 - [8. Results and Evaluation](#8-results-and-evaluation)
-  - [8.1. Acceptance Criteria](#81-acceptance-criteria)
+  - [8.1. Acceptance Criteria](#81-acceptance-criteria)  
+  - [8.2. System Evaluation Summary (Rubric-Based)](#82-system-evaluation-summary-rubric-based)
+  - [8.3. Areas for Improvement (Based on Evaluation Feedback)](#83-areas-for-improvement-based-on-evaluation-feedback)
 - [9. Lessons Learned](#9-lessons-learned)
-- [10. Future Work](#10-future-work)
+- [10. Future Work](#10-future-work)  
+  - [10.1 Improvements Based on Evaluation Feedback](#101-improvements-based-on-evaluation-feedback)
 - [11. Appendices](#11-appendices)
 - [12. References](#12-references)
 - [13. Acknowledgments](#13-acknowledgments)
@@ -77,7 +82,9 @@ This project explores how AI can assist in summarizing de-identified medical not
 The system provides note input, AI summarization, redaction, editable output, and export options. It includes login, password reset, and an admin role for system oversight.  
 Out of scope: full HIPAA compliance, real patient data, EHR integration, multi-clinic scaling, advanced accessibility, model retraining, and high-availability deployment.  
 
----
+---  
+
+<br>  
 
 ## 2. Background and Research  
 
@@ -93,9 +100,9 @@ Out of scope: full HIPAA compliance, real patient data, EHR integration, multi-c
 #### Samuel Wu:  
  [Research Topics](../docs/official/research/Samuel%20Wu%20-%20Research%20Topics.pdf)  
 
+---  
 
-
----
+<br>  
 
 ## 3. System Design and Architecture
 
@@ -161,28 +168,48 @@ Authentication and sessions control access, while an audit logging service recor
 
 - **PHI handling and redaction**  
 Handled by fallback code (or Philter). Redacts sensitive patient information (such as their real name).  
-...
 
 - **Authentication and authorization**  
 Account creation, password hashing, password reset tokens and authentication are all handled by Auth0.  
-...
 
 - **Session management**  
 Sessions are created when a user logs in to the system. Sessions are cleared after the tab is closed or if the user logs out.  
 
-
 - **Data in transit**  
 Redacted doctor notes are sent to OpenAI and LLM's for summarization. Sensitive information is not leaked to the best of the application's abilities.  
-
 
 - **Data at rest**   
 Since Doctor note summaries are not stored within this application, just an extra security for HIPAA information, it is fully destroyed after session ends.  
 
 - **Third-party services**  
-This Application uses: Auth0, MongoDB, OpenAI, phi4-mini
-...
+This Application uses: Auth0, MongoDB, OpenAI, phi4-mini.  
 
----
+
+### 3.6.1 Security Controls Not Implemented (Prototype Limits)
+
+This system is a capstone prototype intended for demonstration and educational use. The following controls are *not* implemented to a production or HIPAA-aligned standard:
+
+- **Not HIPAA compliant / no BAA**  
+  The project is not designed or validated as a HIPAA-compliant medical system and should not be used with real PHI.
+
+- **Incomplete end-to-end PHI guarantees**  
+  The system is designed to minimize PHI exposure (redaction-first approach), but it cannot guarantee perfect detection/redaction or perfect model behavior.
+
+- **Limited “user access logging” coverage**  
+  Audit logging exists, but it is not yet comprehensive for all user actions (e.g., full read access trails, export/download events, admin actions, and granular UI events).
+
+- **Security requirements coverage gaps**  
+  Some security and access-logging requirements discussed earlier in planning are not fully represented as explicit requirements and verification steps.
+
+- **No formal threat modeling / pen testing**  
+  The project does not include a formal threat model, penetration testing, or security audit.
+
+- **Hardening and compliance features not completed**  
+  Items such as encryption-at-rest validation, retention policies, least-privilege reviews, and production monitoring/alerting would be required for real deployment.
+
+---  
+
+<br>  
 
 ## 4. Data Design  
 
@@ -219,7 +246,9 @@ Local LLM (when `AI_MODE=local`) routes summarization to a local model (e.g., ph
 - Exports (PDF/DOCX) are user-initiated; server does not retain generated files after response.  
 - All secrets live in `.env` (never committed). Use `.env.example` for documentation.  
 
----
+---  
+
+<br>  
 
 ## 5. Implementation Details
 
@@ -294,13 +323,6 @@ Project Structure
 
 ├─ tests/                     # Test data and templates (no PHI)
 │  ├─ data/
-│  │  ├─ Fake Patient Summary/
-│  │  │  ├─ Adults/
-│  │  │  ├─ Children/
-│  │  │  ├─ Elderly/
-│  │  │  └─ Lengthy/
-│  │  ├─ SyntheticDataTest/   # Synthetic and edge-case notes
-│  │  └─ WackyTests/          # Adversarial or formatting-stress examples
 │  └─ templates/              # Test harness templates or fixtures
 │
 ├─ .env                       # Runtime secrets (NOT committed) – use .env.example
@@ -318,8 +340,9 @@ The project was managed using GitHub Projects and weekly sprint planning. Key pl
 * [Team Roles & Contributions Matrix](../docs/project-management/Team_Roles_Matrix.md)
 * [Initial Work Breakdown Structure](../docs/project-management/Initial_WBS.md)  
 
+---  
 
----
+<br>  
 
 ## 6. Testing and Quality Assurance
 [Testing Document](../docs/dev/404pnf_testing_doc.pdf)
@@ -359,7 +382,33 @@ All in all, testing is a rolling assignment. Testing occurs during, and even aft
 - Multer
 - PDF-Parse, Mammoth (For converting PDF or DOC file input into plain text)
 
----
+
+### 6.4. Automated Testing Gaps and Next Steps
+
+The project includes structured testing practices and tools, but the current testing approach is more manual and integration-driven than fully automated. The following gaps were identified during evaluation:
+
+- **Limited automated coverage**  
+  Automated tests do not yet cover a broad range of routes, edge cases, and pipeline failure modes.
+
+- **AI-provider dependency**  
+  Some behaviors are hard to test repeatably without stable mocks/stubs for external AI APIs and local model outputs.
+
+- **Inconsistent response format testing**  
+  There is not yet a single automated suite verifying consistent success/error response envelopes across all endpoints.
+
+- **UI regression testing not established**  
+  There is no automated UI regression layer (smoke tests, accessibility checks, or snapshot tests) for the frontend.
+
+Planned improvements:
+- Add **route-level integration tests** for core endpoints (upload -> parse -> pipeline -> export).
+- Add **unit tests** for pipeline stages (validation, redaction, summarization, reinsertion).
+- Introduce **mock AI providers** for deterministic pipeline testing.
+- Add **contract tests** to enforce consistent API response formats and error codes.
+- Add a minimal **CI test gate** (run tests on PR) to prevent regressions.
+
+---  
+
+<br>  
 
 ## 7. Deployment
 
@@ -444,7 +493,7 @@ For full details on how APP_MODE affects routing, login, sessions, and MongoDB,
 see the complete guide:  
 [APP_MODE Guide](../docs/dev/app_mode-guide.md)  
 
----  
+ 
 
 ### 7.3 Deployment Notes
 
@@ -473,8 +522,9 @@ see the complete guide:
 
 > Summary: The Render site is a **prototype for user testing only**. A real deployment would occur inside a healthcare organization’s environment (or a HIPAA-eligible cloud), integrated with EHR systems and backed by full security/compliance controls.
 
+---  
 
----
+<br>  
 
 ## 8. Results and Evaluation
 
@@ -537,7 +587,51 @@ Known Issues:
 - Summaries achieve at least 80% recall for key clinical concepts.  
 - No PHI is stored; summaries stay in the browser, and only PHI-free audit metadata is logged.    
 
----
+
+### 8.2. System Evaluation Summary (Rubric-Based)
+
+Strengths:
+- **Fulfillment of purpose:** Delivers a functional prototype for clinical note summarization and redaction with clear scope limitations (demo-only).
+- **Coding structure:** Clear separation of concerns across routes/controllers/middleware/services and a modular AI workflow.
+- **Internal documentation:** Architecture and API documentation are a notable strength; materials are organized and readable.
+- **Overall project quality:** Strong educational value and broad feature coverage for a capstone prototype.
+
+Areas noted for improvement:
+- **UI/UX polish:** UI is functional but basic; needs more modern styling and clearer consolidation of experimental views.
+- **Accessibility:** No clear accessibility features documented (keyboard navigation, contrast considerations, etc.).
+- **Code quality consistency:** Error response formats are not fully consistent across endpoints.
+- **AI pipeline complexity documentation:** Some complex AI processing logic would benefit from stronger inline documentation.
+- **Type safety:** Plain JavaScript means less compile-time protection than a typed approach (e.g., TypeScript).
+- **Automated testing depth:** Testing framework exists, but automated coverage is limited compared to production expectations.
+- **Requirements traceability:** Some risks and security/access logging expectations discussed earlier are not fully reflected as explicit requirements + verification steps.
+- **Use-case modeling completeness:** Use cases should emphasize user goals and include missing flows (multi-file upload, export formats, history, fallback behaviors, password reset, and clearer admin vs doctor boundaries).
+
+### 8.3. Areas for Improvement (Based on Evaluation Feedback)
+
+UI/UX and Accessibility
+- Improve visual polish and consistency (layout, spacing, typography, feedback states).
+- Consolidate or clearly label experimental views; reduce confusion for demo users.
+- Add and document accessibility basics (keyboard navigation, focus states, readable contrast, clear headings).
+
+Security, Privacy, and Compliance (Prototype Limits)
+- Expand documentation to explicitly list what is *not* implemented for a production healthcare system.
+- Strengthen and document **user access logging** coverage (what events are logged and why).
+- Improve requirements traceability: ensure security + logging expectations are represented as requirements with verification methods.
+
+Code Quality and Maintainability
+- Standardize API response envelopes (success/error) across all endpoints.
+- Centralize error handling and error-code mapping to reduce route-by-route variance.
+- Add more inline documentation/JSDoc around AI pipeline stages, inputs/outputs, and failure modes.
+- Consider TypeScript (or structured runtime validation) for safer data handling.
+
+Testing and Quality Assurance
+- Increase automated test coverage (unit + integration) for pipeline stages and core routes.
+- Add deterministic mocks for AI providers to make tests repeatable.
+- Add regression checks for response format consistency and key user flows.
+
+---  
+
+<br>  
 
 ## 9. Lessons Learned  
 
@@ -573,7 +667,10 @@ Learned the hard way that order matters in `server.js`. Debugging session middle
 - Ensure that there are not any miscommunication errors when discussing the functionality of how a page should function.  
 - Find a working schedule for the team to collaboratively work.  
 - Pace yourselves accordingly or try to at least lay out the base foundations of the project first.  
----
+
+---  
+
+<br>  
 
 ## 10. Future Work  
 - Implement stronger PHI Redaction
@@ -584,9 +681,31 @@ Learned the hard way that order matters in `server.js`. Debugging session middle
 - Auto-Categorization
 - Improvements to Admin Dashboard (e.g. Search Function)
 - Performance Optimization
-- UI Improvements
+- UI Improvements  
+
+### 10.1 Improvements Based on Evaluation Feedback
+
+High Priority (most directly tied to grading feedback)
+- Standardize API success/error response formats across all endpoints.
+- Expand automated testing: pipeline unit tests + route integration tests + mocked AI providers.
+- Add documented accessibility baseline (keyboard navigation, focus states, contrast notes).
+- Improve UI polish and consolidate/label experimental views.
+
+Medium Priority
+- Add stronger inline documentation/JSDoc for AI pipeline stages and complex processing logic.
+- Improve requirements traceability: reflect security + access logging expectations as explicit requirements with verification steps.
+- Strengthen audit logging coverage (more complete event tracking: exports, admin actions, key user actions).
+
+Longer-Term / Post-Capstone Expansion
+- Consider TypeScript adoption or runtime schema validation for safer input/output handling.
+- Enhance admin dashboard usability (search/filter, audit views).
+- Expand OCR/ingestion capabilities (handwritten notes, audio workflows) with clear privacy constraints.
+- Performance optimization and scaling considerations (queues, caching, rate limiting, monitoring).
 
 
+---  
+
+<br>  
 
 ## 11. Appendices  
 - [User Manual](../docs/official/404PNF_help_documentation.pdf)
@@ -594,6 +713,9 @@ Learned the hard way that order matters in `server.js`. Debugging session middle
 - [Patrick and Sam's Testing Report](../docs/official/dataset%20and%20recall%20accuracy.pdf)
 - [HIPAA Awareness](../docs/user/HIPAA-Awareness.txt)
 
+---  
+
+<br>  
 
 ## 12. References  
 - Arias, J. (2024). *Project 2 - Server Side - F24* [Course handout].  
@@ -623,6 +745,10 @@ Thanks to mentors, faculty advisors, and collaborators who supported the project
 **Our faculty advisor:**  
 Professor Juan Arias.  
 
+---  
+
+<br>  
+
 ## 14. Project Timeline
 
 |Milestone|Deliverable|Date|
@@ -635,5 +761,6 @@ Professor Juan Arias.
 |Final Presentation|Final Demo|Dec 8|
 |Final Submission|Full System & Report|Dec 12|
 
----
+---  
 
+<br>  
