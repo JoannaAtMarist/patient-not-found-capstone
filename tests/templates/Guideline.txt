@@ -1,0 +1,9 @@
+Expected Summary Lengths for Summaries: Should not exceed the amount of information given.
+Cannot hallucinate with information that is not present.
+Cannot extrapolate from non-conclusive information.
+
+Pass = 80% Accuracy
+Fail conditions:
+- Cannot be too long (not way longer than the inputted information)
+- Cannot be too short (cannot be a short summary unless there is little to no information)
+- Irrelevant information
