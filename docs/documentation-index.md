@@ -255,10 +255,8 @@ Local LLM (when `AI_MODE=local`) routes summarization to a local model (e.g., ph
 ### 5.1. Development Methodology
 The team followed a lightweight Agile approach with weekly goals aligned to course milestones. Work was tracked using GitHub Issues and a Project Board. Each team member maintained a personal branch, and merges occurred after review. Development was iterative, with early prototypes guiding refinements to summarization, UI, and authentication features. 
 
-The backend did not start completely from scratch. Joanna used her CMPT 221 Software Development II project as a structural skeleton for this application (Picciano, 2024). Specifically,
-she reused the overall `server.js` outline (Express setup, routing pattern) and the basic separation
-into controllers and models. For the capstone, these pieces were refactored and extended to support
-new requirements. 
+The backend did not start completely from scratch. Joanna used an earlier Node/Express project as a structural skeleton for this application (Picciano, 2024). Specifically, she reused the overall Express setup and routing pattern (see `Server/index.js`) and the basic separation into controllers and models. The capstone backend then refactored and extended these pieces to meet new requirements.
+ 
 
 
 ### 5.2. Core Features  
@@ -718,8 +716,7 @@ Longer-Term / Post-Capstone Expansion
 <br>  
 
 ## 12. References  
-- Arias, J. (2024). *Project 2 - Server Side - F24* [Course handout].  
-  CMPT 221: Software Development II, Marist College.
+- Arias, J. (2024). *Course handout* [Unpublished].
 - Auth0. (2025). *Auth0 documentation*. https://auth0.com/docs
 - Google. (2025). *Gemini (large language model)*. https://gemini.google.com
 - Google. (2025). *NotebookLM (AI research and note-taking tool)*. https://notebooklm.google/
@@ -729,8 +726,8 @@ Longer-Term / Post-Capstone Expansion
 - OpenAI. (2025). *OpenAI API reference: Introduction*. https://platform.openai.com/docs/api-reference/introduction
 - OpenJS Foundation. (2025). *Express.js documentation*. https://expressjs.com/
 - OpenJS Foundation. (2025). *Node.js documentation*. https://nodejs.org/en/docs
-- Picciano, J. (2024). *Data Manager client–server application backend* [currently unpublished course project].  
-  CMPT 221: Software Development II, Marist College.
+- Picciano, J. (2024). *Violet Avenue Gardeners* [Source code]. GitHub repository.  
+  https://github.com/JoannaAtMarist/node-weather-app (Retrieved 2025-12-23)  
 - Render. (2025). *Render documentation*. https://render.com/docs
 - SmartBear Software. (2025). *Swagger documentation*. https://swagger.io/docs/
 - Yusuf. (2024, March 10). *Useful Github Actions: Discord Webhooks*. Medium. https://medium.com/@yusufbiyik/useful-github-actions-discord-webhooks-6e356751d954
